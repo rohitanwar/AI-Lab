@@ -2,15 +2,13 @@ class Node:
     def __init__(self,data):
         self.data = data
         self.children = []
-    
     def add_child(self,child):
         self.children.append(child)
-    
 class Tree:
     def __init__(self,root):
         self.root = root
 
-    def bfs(self):
+    def dfs(self):
         if self.root is None:
             return
         print(f'{self.root.data}',end='')
@@ -44,4 +42,4 @@ c.add_child(h)
 d.add_child(i)
 
 tree = Tree(a)
-tree.bfs()
+tree.dfs()

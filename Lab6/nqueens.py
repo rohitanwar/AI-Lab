@@ -36,4 +36,7 @@ def safeIndex(i,indices):
         if abs(x-i) == abs(y-j): return False
     return True
 
-solve(8)
+if __name__ == "__main__":
+    print("Please enter size of board: ")
+    n = int(input())
+    solve(n)
