@@ -1,32 +1,26 @@
-from copy import deepcopy
+from copy import copy
 
 def printSoln(solution):
     for row in solution:
-        for el in row:
-            print(el,end=" ")
-        print("")
+        printable = ". "*row + "Q " + ". "*(n-row-1)
+        print(printable)
 
 def solve(n):
-    board = [[0]*n for i in range(n)]
-    solutions = placeQueens(0,board)
-    for i, solution in enumerate(solutions):
-        print(f"Solution {i}: ")
-        printSoln(solution)
-
-def placeQueens(n,board):
     indices = []
-    for row in board:
-        if 1 in row:
-            indices.append(row.index(1))
-    if len(indices) == len(board):
-        return [board]
-    solutions = []
-    for i in range(len(board)):
+    solutions = placeQueens(n,indices)
+    printSoln(solutions)
+
+def placeQueens(n,indices):
+    if len(indices) == n:
+        return indices
+    for i in range(n):
         if safeIndex(i,indices):
-            newboard = deepcopy(board)
-            newboard[len(indices)][i] = 1
-            solutions += placeQueens(n+1,newboard)
-    return solutions
+            newindices = copy(indices)
+            newindices.append(i)
+            soln = placeQueens(n,newindices)
+            if len(soln) != 0:
+                return soln
+    return []
 
 def safeIndex(i,indices):
     if i in indices: return False
